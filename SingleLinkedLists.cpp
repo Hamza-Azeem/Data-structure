@@ -55,6 +55,8 @@ class MyLinkedList {
             if(head == NULL)
             {
              head = newNode;
+             cout<<newNode<<endl;
+             cout<<head<<endl;
              return;   
             }
             Node *tmp = head;
@@ -141,26 +143,36 @@ class MyLinkedList {
         cout<<endl;
 
     }
-    
+    bool hasCycle() {
+        Node *c1 = head;
+        bool f = false;
+        vector<Node*> vec;
+        vec.push_back(head);
+        while(c1 != NULL)
+        { 
+            for(int i=0;i<vec.size();i++)
+            {
+                if(c1 == vec[i])
+                {
+                    f = true;
+                    break;
+                }
+            }
+            if(f)
+                break;
+            vec.push_back(c1);
+            c1 = c1->next;
+        }
+        return f;
+    }
 
 };
 
 int main()
 {
    MyLinkedList *list = new MyLinkedList();
-   list->addAtTail(2);
-   list->addAtTail(3);
-   list->addAtTail(4);
-   list->addAtTail(5);
-   list->addAtHead(1);
-   list->addAtTail(6);
-   list->addAtTail(7);
-   list->addAtHead(0);
-   list->addAtIndex(0,8);
-   list->addAtIndex(9,9);
-   list->printList();
-   
-   
+   list->addAtHead(2);
+   list->hasCycle();
 
     return 0;
 }
